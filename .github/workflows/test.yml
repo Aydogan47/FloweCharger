@@ -1,0 +1,17 @@
+name: Kotlin Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+      - name: Compile and run
+        run: |
+          kotlinc PongGame.kt -include-runtime -d PongGame.jar
+          java -jar PongGame.jar
